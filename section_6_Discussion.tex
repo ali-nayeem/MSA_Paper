@@ -1,0 +1,12 @@
+\section{Discussion}
+\label{sec:discussion}
+In this study, we have introduced a phylogeny-aware multi-objective optimization approach to compute MSA with an ultimate goal to infer the phylogenetic tree from the resultant alignments. To optimize MSA, we proposed two simple objective functions in addition to the existing ones. We judged the potential capability of each objective function to yield better trees by employing domain knowledge as well as by applying statistical approaches. We employed multiple linear regression to measure the degree of association between the individual objective functions and the quality of inferred phylogenetic tree (i.e., FN rate). Thus, we provide empirical justification to choose two multi-objective formulations to move forward. Afterwards, we performed extensive experimentation with both simulated and biological datasets to demonstrate the benefit of our approach. We showed that, the simultaneous optimization of a set of phylogeny-aware objective fucntions can offer phylogenetic trees with improved accuracy than that of the state-of-the-art MSA tools. From this finding, we would like to hypothesize that, the use of domain specific measures can aid an MSA methods in other application domian as well.
+
+Our obtained results suggest that, it could be possible to develop improved MSA methods for phylogenetic analysis by utilizing our preferred objective functions. Moreover, in almost all existing studies on MSA, we find the researchers evaluating the effectiveness of MSA methods using some generic alignment quality measures (i.e., TC score, SP score) without paying any heed to the actual purpose of MSA. Contrastingly, our results revealed that, optimizing those widely used measures do not necessarily lead us to the best phylogenetic tree. This finding could be an eye opener for the researchers who need to use MSA methods to address a particular application. 
+
+We tried to test our method rigorously by working on 29 datasets of varying sizes and complexities. And our findings are consistent throughout all the datasets. Still, we acknowledge the possibility of facing few unforeseen circumstances as follows. There might be some datasets on which our approach might not exhibit satisfactory performance. Besides, currently we did not pay any effort to improve the running time of our approach which is higher as compared to top MSA tools. However, sufficient speedup could be achieved by leveraging the modern computing architectures (computer cluster, GPU, etc.).
+
+
+
+
+

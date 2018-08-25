@@ -1,0 +1,92 @@
+\documentclass[twocolumn, 11pt, titlepage]{article} %, titlepage
+
+
+%MAN
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{changepage}
+\usepackage{color} % added by Bayzid
+\usepackage{xr}
+\externaldocument{supp}
+%\usepackage{setspace}
+%\doublespacing
+%\setstretch{1.8}
+
+%\usepackage{lineno}
+%\usepackage[bottom]{footmisc}
+%\raggedbottom
+%\newcommand{\citealp}[1]{\cite #1}
+%\flushbottom
+\usepackage{authblk}
+\usepackage[symbol]{footmisc}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\commentA}[1]{{\color{red} #1}}
+\newcommand{\commentM}[1]{{\color{blue} #1}}
+
+%%%%%%%for sqeezing table column from toufiue
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%opening
+
+
+\title{Multi-objective formulation of multiple sequence alignment for phylogeny estimation: Do phylogeny-aware measures guide towards better phylogenetic tree? }
+\author{Muhammad Ali Nayeem}
+\author{Md. Shamsuzzoha Bayzid}
+\author{Atif Hasan Rahman}
+\author{Rifat Shahriyar}
+\author{M. Sohel Rahman\footnote{Corresponding author. Professor, Dept. of CSE, BUET, Dhaka 1000, Bangladesh. E-mail: msrahman@cse.buet.ac.bd}} %(M.S. Rahman)
+\affil{{\small \textit{Department of CSE, BUET, Dhaka 1000, Bangladesh}}}
+%\renewcommand\Affilfont{\itshape\small}
+\affil{\textbf{Keywords:} Multiple sequence alignment, Phylogenetic tree, Multi-objective optimization, Metaheuristics, Evolutionary algorithm}
+\date{} 
+
+%\usepackage{etoolbox}
+%\makeatletter
+%\patchcmd\@combinedblfloats{\box\@outputbox}{\unvbox\@outputbox}{}{%
+%	\errmessage{\noexpand\@combinedblfloats could not be patched}%
+%}%
+%\hypersetup{draft}
+\makeatother
+\begin{document}
+
+\maketitle
+
+%\linenumbers
+\input{section_0_Abstract} 
+\input{section_1_Introduction} 
+\input{section_4_Results}
+\input{section_6_Discussion}
+\input{section_3_Methods}
+
+\section*{Acknowledgements}
+This research was conducted at the Department of Computer Science and Engineering (CSE), Bangladesh University of Engineering and Technology (BUET) and supported by ICT Division, Government of Peoples`s Republic of Bangladesh.
+%We are grateful to the Department of CSE, BUET for providing necessary resources. \vspace*{-12pt}
+
+
+%\clearpage
+%\bibliographystyle{natbib}
+%\bibliographystyle{achemnat}
+\bibliographystyle{plainnat}
+%\bibliographystyle{abbrv}
+%\bibliographystyle{bioinformatics}
+%
+%\bibliographystyle{plain}
+%
+\bibliography{document}
+
+
+\end{document}
