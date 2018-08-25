@@ -17,7 +17,7 @@ Our experimental methodology is briefly described below (see also Figure~\ref{fi
 \begin{itemize}
 	\item \underline{Step 1:} Following a systematic approach involving multiple linear regression applied on a simulated dataset, we first make an attempt to identify and choose two multi-objective formulations that turn out to be potentially more effective in the context of phylogeny estimation. 
 	\item \underline{Step 2:} We run a popular and effective multi-objective metaheuristics on both biological and simulated datasets to optimize each set of objective functions selected in Step 1. Each run of the meteheuristics on each dataset gives us a set of alignments as output. 
-	\item \underline{Step 3:} We also run nine state-of-the-art MSA tools (see Section~\ref{sec:methods}, Table~\ref{tab:msa_tools}) \commentA{with default parameters} to generate alignments on all these datasets.
+	\item \underline{Step 3:} We also run nine state-of-the-art MSA tools (see Section~\ref{sec:methods}, Table~\ref{tab:msa_tools}) \commentA{with default parameters}\footnote{\commentA{It is usual practice of MSA literature. Should I exclude this?}} to generate alignments on all these datasets.
 	% and then estimate maximum likelihood (ML) phylogenetic tree from those alignments. We evaluate the quality of these alignments and ML trees.
 	\item \underline{Step 4:} We evaluate the quality of each generated alignment with respect to the reference alignment using two popular measures, namely, SP score and TC score. 
 	%For biological datasets, we used manually curated alignments as reference.
