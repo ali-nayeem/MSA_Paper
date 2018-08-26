@@ -52,12 +52,15 @@ There are numerous objective functions defined for MSA in the literature. We ide
 	
 \end{itemize}
 
-\section{Multi-objective optimization}
-\label{sec:mop}
-While optimizing multiple objective functions simultaneously, we determine a set of solutions which represents the best-possible compromise of all objectives. A solution is said to dominate another one if and only if it is equal to that solution in all objectives and also better than that in at least one objective. A solution is said to be Pareto optimal if no other solutions can dominate it. The set of all Pareto optimal solutions is called Pareto set and the image of pareto set in the objective space is known as pareto front. However, practically a multi-objective optimization algorithm aims to approximate the pareto front as precisely as possible with a finite number of solutions.
-
+%\section{Multi-objective optimization}
 \section{Multi-objective metaheuristics}
-Among meteheuristics, evolutionary algorithms (EAs) are population-based, black-box optimization methods and do not need particular assumptions like continuity or differentiability of the decision space. They are well suited for multi-objective optimization~\cite{yang2013grid}. 
+\label{sec:mop}
+While optimizing multiple objective functions simultaneously, a multi-objective metaheuristics determines a set of solutions (instead of a single solution) which represents the best-possible compromise of all objectives. A solution is said to dominate another one if and only if it is equal to that solution in all objectives and also better than that in at least one objective. A solution is said to be Pareto optimal if no other solutions can dominate it. The set of all Pareto optimal solutions is called Pareto set and the image of pareto set in the objective space is known as Pareto front. However, practically a multi-objective metaheuristics aims to approximate the Pareto front as precisely as possible with a finite number of solutions.
+
+%\subsection{Evolutionary algorithms}
+Among meteheuristics, evolutionary algorithms (EAs) are well-suited to solve multi-objective optimization problems~\cite{yang2013grid}. EAs deal with a set of possible solutions (known as population) at once which allows to find several members of the Pareto front in a single run of the algorithm. Moreover, they are  black-box optimization methods which do not need particular assumptions like continuity or differentiability of the decision space. 
+
+%So the goal of a multi-objective meteheuristics is to output a set of solutions instead of a single solution., evolutionary algorithms (EAs) are population-based, They are well suited for multi-objective optimization. 
 
 \begin{algorithm}[!htb]
 	\caption{A General structure of EA}
@@ -74,14 +77,31 @@ Among meteheuristics, evolutionary algorithms (EAs) are population-based, black-
 	\end{algorithmic}
 \end{algorithm}
 
-A general structure of EAs is summarized in Algorithm \ref{alg:MaOEA}. Here the \textit{Crossover} and \textit{Mutation} are popularly known as genetic operators. They generate offspring (new solutions) from parents (existing solutions). These are designed based on the actual problem to be solved. \textit{Ranking scheme} is used to choose appropriate solutions to form the next generation. This is problem-independent concept and designed by the developers of a specific algorithm.
+A general structure of EAs is summarized in Algorithm \ref{alg:MaOEA}. Here the \textit{Crossover} and \textit{Mutation} are popularly known as genetic operators. They generate offspring (new solutions) from parents (existing solutions). These are problem-specific and designed based on the actual problem to be solved. \textit{Ranking scheme} is used to choose appropriate solutions to form the next generation. This is problem-independent concept and provided by the developers of a specific algorithm. In this study, we considered the two widely used EAs for multi-objective optimization. We briefly describe them as follows.
 
- We implement these two metaheuristics using jMetalMSA of~\citealp{zambrano2017multi} which is a Java meteheuristic framework for MSA publicly available at~\url{https://github.com/jMetal/jMetalMSA}. 
+\begin{enumerate}[(a)]
+	
+	\item NSGA-II~\citep{deb2002fast} follows the classical structure of a generational genetic algorithm. At first, it applies the typical genetic operators (selection, crossover, and mutation) on the current population to fill an auxiliary population. Then it builds the next-generation by incorporating the best individuals from both the current and auxiliary populations according to a Pareto ranking and the crowding distance operator. Perhaps it is the most commonly used algorithm for solving optimization problems having two or three objective functions. 
+	
+	\item NSGA-III~\citep{deb2014evolutionary} is designed to handle a large number of objective functions. The skeleton of NSGA-III remains similar to its predecessor NSGA-II with notable changes in its selection mechanism. At each generation, it produces an offspring population from the current population by applying genetic operators. These two populations are merged to form a new population using the selection mechanism. NSGAIII continues to use Pareto dominance as the primary selection criterion to promote convergence. But it substitutes the crowding distance operator in NSGA-II with a clustering operator aided by a set of well-distributed reference points as the secondary selection criterion to maintain diversity. NSGAIII has been shown to perform reasonably.
+	%NSGAIII has been shown to perform reasonably on handling a large number of objective functions~\cite{deb2014evolutionary}.	
+\end{enumerate} 
+
+We implement the above two metaheuristics using jMetalMSA~\citep{zambrano2017multi} which is a Java meteheuristic framework for MSA. We used the same mutation and crossover operator used by~\cite{ortuno2013optimizing}. We provide a short description of these operators below. 
+ %publicly available at~\url{https://github.com/jMetal/jMetalMSA}. 
+ 
+ \begin{itemize}
+ 	
+ 	\item The mutation operator is termed as closed gap shifting, where consecutive gaps are randomly chosen and shifted to another random position in a sequence. This shifting may result columns having only gaps which are then removed. Thus this mutation tries to reduce the number of gaps in the MSA. 
+ 	
+ 	\item The crossover operator is the single-point crossover over alignments proposed by~\citealp{da2010alineaga}. The operator randomly selects a column from one parent to split it into two blocks (let us refer to them P1a and P1b). The same selected positions are located in the other parent (which are not necessarily in the same column) and is tailored so that the right piece can be joined to the left piece of the first parent and vice versa (P2a and P2b). Finally, the selected blocks are exchanged between these two parents to create two new individuals with the combination of the blocks: [P1a + P2b] and [P1a + P1b]. After that, any empty space that appears at the junction point is filled with gaps.
+ 	%NSGAIII has been shown to perform reasonably on handling a large number of objective functions~\cite{deb2014evolutionary}.	
+ \end{itemize}
 
 
 
-\section{Our multi-objective metaheuristic framework}
-\label{sec:mof}
+%\subsection{Our multi-objective metaheuristic framework}
+%\label{sec:mof}
 % Table generated by Excel2LaTeX from sheet 'multi-pc'
 
 \begin{comment}
@@ -120,12 +140,13 @@ Instead of initializing solutions randomly, which is the usual practice in metah
 	\end{tabular}%
 	\label{tab:msa_tools}%
 \end{table*}%
-\end{comment}
+
 \subsubsection{Genetic Operator}
 Both of our metaheuristics used the same genetic operator (i.e. mutation and crossover), which were used by~\citealp{ortuno2013optimizing}. \citealp{zambrano2017multi} illustrated their functions. Here we provide a short description of these operators. 
 
 The mutation operator is termed as closed gap shifting, where consecutive gaps are randomly chosen and shifted to another random position in a sequence. This shifting may result columns having only gaps which are then removed. Thus this mutation tries to reduce the number of gaps in the MSA.
 
 The crossover operator is the single-point crossover over alignments proposed by~\citealp{da2010alineaga}. The operator randomly selects a column from one parent to split it into two blocks (let us refer to them P1a and P1b). The same selected positions are located in the other parent (which are not necessarily in the same column) and is tailored so that the right piece can be joined to the left piece of the first parent and vice versa (P2a and P2b). Finally, the selected blocks are exchanged between these two parents to create two new individuals with the combination of the blocks: [P1a + P2b] and [P1a + P1b]. After that, any empty space that appears at the junction point is filled with gaps.
-\subsubsection{Multi-objective evolutionary algorithm}
+%\subsubsection{Multi-objective evolutionary algorithm}
 %\subsubsection{Parameter Configuration}
+\end{comment}
