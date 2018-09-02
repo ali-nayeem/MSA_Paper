@@ -24,7 +24,7 @@ We describe these objective functions along with several existing ones in Sectio
 	
 	\item \textbf{Maximize similarity based on non-gap columns (SimNG)}: We consider only non-gap column while measuring similarity.
 	
-	\item \textbf{Maximize concentration of gaps (GapCon)}: We find that, a widely used objective function, namely, affine gap penalty~\citep{rani2016multiple}, combines two aspects of an aligned sequence, number of gaps and concentration of gaps, into a single one using weighted sum. We need to tune the weight values based on the dataset. To avoid this tuning we decide to decouple the two components. We have already considered the number of gaps as an objective function. Now we define the concentration of gaps as an independent objective which as calculated as follows. For each sequence, we count the number of consecutive gaps and take the mean of these counts. Finally, we average the resultant means for all sequences.
+	\item \textbf{Maximize concentration of gaps (GapCon)}: We find that a widely used objective function, namely, affine gap penalty~\citep{rani2016multiple}, combines two aspects of an aligned sequence, number of gaps and concentration of gaps, into a single one using weighted sum. We need to tune the weight values based on the dataset. To avoid this tuning we decide to decouple the two components. We have already considered the number of gaps as an objective function. Now we define the concentration of gaps as an independent objective which as calculated as follows. For each sequence, we count the number of consecutive gaps and take the mean of these counts. Finally, we average the resultant means for all sequences.
 \end{itemize}
 
 In this study, we used the terms shown in Table~\ref{tab:abbr} to refer to these objective functions. 
@@ -152,7 +152,7 @@ We evaluate estimated alignments with respect to reference alignment using two w
 	
 	%\item Pairs score is the mean of SP-score and Modeler. SP-Score is the ratio of the number of aligned pairs to the total number of aligned pairs in the reference alignment. And Modeler is very similar to the SP-score where we take the ratio of the number of aligned pairs to the total number of aligned pairs in the estimated alignment  	
 \end{itemize}
-For both the measures, higher value implies better score..
+For both the measures, higher value implies better score.
 
 \subsection{Phylogenetic tree estimation}
 For each of the generated alignment we estimate the phylogenetic tree using Maximum Likelihood (ML) method. We used a popular tool named FastTree-2 developed by \citealp{price2010fasttree}. %It is publicly available at \url{http://www.microbesonline.org/fasttree/}.
